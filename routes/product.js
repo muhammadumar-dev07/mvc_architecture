@@ -6,12 +6,12 @@ import{
     updateProductController
 } from "../controller/product.js";
 
-const router = express.Router();
+const productRouter = express.Router();
 
 
-router.get("/", getProductsController);
-router.post("/", saveProductController);
-router.put("/:id", updateProductController);
-router.delete("/:id", deleteProductController);
+productRouter.get("/", getProductsController);
+productRouter.post("/", saveProductController);
+productRouter.put("/:id", updateProductController);
+productRouter.delete("/:id", deleteProductController);
 
-export default router;
+export default productRouter;
