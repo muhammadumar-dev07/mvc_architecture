@@ -9,18 +9,25 @@ dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 dotenv.config();
 
-
 connectDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(",").map((origin) => origin.trim())
+    : ["http://localhost:5173"];
+app.use(cors({ origin: allowedOrigins, credentials: true }));
+
+
 
 app.use("/products", productRouter);
 
-const PORT= 5050;
+const PORT = process.env.PORT || 5050;
 
-app.listen(PORT,()=>{
-    console.log("Server running on port 5050");
-})
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+connectDB();
 
